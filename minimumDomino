@@ -1,0 +1,22 @@
+// Time Complexity : O(n)
+// Space Complexity : O(1)
+
+//we're considering 1st element of the both arrays as valid candidate and pass it to method one by one.
+
+class Solution {
+    public int minDominoRotations(int[] tops, int[] bottoms) {
+        int result = check(tops, bottoms, tops[0]);
+        if(result!=-1) return result;
+        return check(tops, bottoms, bottoms[0]);
+    }
+
+    private int check(int[] tops, int[] bottoms, int candidate){
+        int tRot = 0, bRot = 0;
+        for(int i=0; i<tops.length; i++){
+            if(tops[i]!=candidate && bottoms[i]!=candidate) return -1;
+            if(tops[i]!=candidate) tRot++;
+            if(bottoms[i]!=candidate) bRot++;
+        }
+        return Math.min(tRot,bRot);
+    }
+}
